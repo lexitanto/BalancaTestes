@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO_PATH="/opt/BalancaPubRepo"
+REPO_PATH="/opt/BalancaTestes"
 CMD_INICIAR="python3 $REPO_PATH/bin/app/main.py"
 LOG_FILE="/tmp/monitor.log"
 onehour=3600

@@ -2,7 +2,7 @@ import os
 import time
 import sqlite3
 
-DB_PATH = "/opt/BalancaPubRepo/data/meubanco.db"
+DB_PATH = "/opt/BalancaTestes/data/meubanco.db"
 
 class database_connection():
     def __init__(self):

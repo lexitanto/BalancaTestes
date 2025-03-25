@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO_PATH="/opt/BalancaPubRepo"
+REPO_PATH="/opt/BalancaTestes"
 LOG_FILE="/tmp/update_repo.log"
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') - [Update] Atualizando repositório..." | tee -a "$LOG_FILE"

@@ -2,7 +2,7 @@
 
 USER=$(logname)
 MONITOR_SERVICE="/etc/systemd/system/monitor.service"
-MONITOR_SCRIPT_PATH="/opt/BalancaPubRepo/bin/_monitor.sh"
+MONITOR_SCRIPT_PATH="/opt/BalancaTestes/bin/_monitor.sh"
 
 sudo chmod +x "$MONITOR_SCRIPT_PATH"
 
@@ -15,7 +15,7 @@ Wants=network-online.target
 [Service]
 Type=simple
 ExecStart=$MONITOR_SCRIPT_PATH
-WorkingDirectory=/opt/BalancaPubRepo/bin/
+WorkingDirectory=/opt/BalancaTestes/bin/
 Restart=always
 StandardOutput=journal
 StandardError=journal
@@ -25,7 +25,7 @@ WantedBy=multi-user.target
 EOF
 
 WIFICONFIG_SERVICE="/etc/systemd/system/wifi-setup-monitor.service"
-WIFICONFIG_SCRIPT_PATH="/opt/BalancaPubRepo/bin/_wificonfig.sh"
+WIFICONFIG_SCRIPT_PATH="/opt/BalancaTestes/bin/_wificonfig.sh"
 
 sudo chmod +x "$WIFICONFIG_SCRIPT_PATH"
 
