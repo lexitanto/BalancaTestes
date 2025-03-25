@@ -14,7 +14,7 @@ MAX_TENTATIVAS = 5
 PROLIFIC_PADRAO = 'usb-Prolific_Technology_Inc._USB-Serial_Controller'
 DEV_PATH = '/dev/serial/by-id'
 DEVICE_PATH = '/etc/device_id'
-URL_SERVER = 'https://9271-170-80-64-72.ngrok-free.app/IoT/Balanca'
+URL_SERVER = 'https://fa8e-170-80-64-72.ngrok-free.app/IoT/Balanca'
 URL_PAYLOAD = '/payload'
 URL_EQUIPAMENTO = '/check_equipamento'
 DB = database_connection()
@@ -246,7 +246,6 @@ class balanca():
             try:            
                 headers = {"Content-Type": "application/octet-stream"}
                 endpoint = URL_SERVER + api_url
-                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] TESTE ENDPOINT {endpoint}")
                 response = requests.post(endpoint, data=data, headers=headers)
                 json_data = response.json()
 
