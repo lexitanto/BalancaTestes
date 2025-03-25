@@ -1,7 +1,7 @@
 import time
 import requests
 
-URL_SERVER = "https://fa8e-170-80-64-72.ngrok-free.app/IoT/Balanca"
+URL_SERVER = "https://9c9c-170-80-64-72.ngrok-free.app/IoT/Balanca"
 
 def enviar_dados():
     dados = {"mensagem": "Olá, servidor!", "timestamp": time.time()}
