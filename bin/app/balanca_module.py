@@ -41,6 +41,7 @@ class balanca():
             if CPU_NUMBER:
                 try:
                     string_dados = f"{CPU_NUMBER};{DEVICE_MODEL}"
+                    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] TESTE STRING DADOS {string_dados}")
                     texto_byte = bytes(string_dados, 'utf-8')
                     response = self.POST_check_equipamento(texto_byte, URL_EQUIPAMENTO)
                     if response:
