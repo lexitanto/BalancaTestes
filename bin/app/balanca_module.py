@@ -247,7 +247,7 @@ class balanca():
                 headers = {"Content-Type": "application/octet-stream"}
                 endpoint = URL_SERVER + api_url
                 response = requests.post(endpoint, data=data, headers=headers)
-                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] {response}")
+                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] HEADERS = {headers}. ENDPOINT = {endpoint} RESPONSE = {response.status_code};{response.raw};{response.json};{response._content}")
 
                 json_data = response.json()
 
