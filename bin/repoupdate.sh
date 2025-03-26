@@ -1,6 +1,7 @@
 #!/bin/bash
 
-. config.sh 
+source config.sh 
+
 LOG_FILE="/tmp/update_repo.log"
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') - [Update] Atualizando repositório..." | tee -a "$LOG_FILE"
