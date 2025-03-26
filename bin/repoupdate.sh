@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REPO_PATH="/opt/BalancaTestes"
-. "$REPO_PATH/config.sh"
+. "$REPO_PATH/bin/config.sh"
 
 LOG_FILE="/tmp/update_repo.log"
 

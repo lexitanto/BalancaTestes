@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source config.sh
+REPO_PATH="/opt/BalancaTestes"
+. "$REPO_PATH/bin/config.sh"
 
 LOG_FILE="/tmp/monitor.log"
 
