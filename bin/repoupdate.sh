@@ -1,7 +1,5 @@
 #!/bin/bash
-
-REPO_PATH="/opt/BalancaTestes"
-. "$REPO_PATH/bin/config.sh"
+source ./config.sh
 
 echo "$(date '+%Y-%m-%d %H:%M:%S') - [Update] Atualizando repositório..." | tee -a "$LOG_FILE"
 
