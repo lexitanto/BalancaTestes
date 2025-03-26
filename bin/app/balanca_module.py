@@ -3,81 +3,20 @@ import os
 import time
 import serial
 import requests
+from config import *
+from led_module import led
 from datetime import datetime
 from connection_module import database_connection
-from led_module import led
 
-
-# Configurações
-INTERVALO_RETRY = 60
-MAX_TENTATIVAS = 5
-PROLIFIC_PADRAO = 'usb-Prolific_Technology_Inc._USB-Serial_Controller'
-DEV_PATH = '/dev/serial/by-id'
-DEVICE_PATH = '/etc/device_id'
-URL_SERVER = 'https://7948-170-80-64-72.ngrok-free.app/IoT/Balanca'
-URL_PAYLOAD = '/payload'
-URL_EQUIPAMENTO = '/check_equipamento'
+LOG_FILE = "/tmp/balanca.log"
 DB = database_connection()
 LED_CONTROL = led()
-LOG_FILE = "/tmp/balanca.log"
-
 
 class balanca():
     def __init__(self):
         self.serial_port = serial.Serial()
-        self.check_equipamento()
         self.find_and_open_serial()
-
-    def check_equipamento(self):
-        global NUMERO_SERIAL, CPU_NUMBER, DEVICE_MODEL
-
-        if os.path.exists(DEVICE_PATH):
-            with open(DEVICE_PATH, 'r') as f:
-                NUMERO_SERIAL = f.read().strip()
-            print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] Número do equipamento carregado: {NUMERO_SERIAL}")
-        else:
-            CPU_NUMBER = self.get_rpi()
-            DEVICE_MODEL = self.get_model()
-            if CPU_NUMBER:
-                try:
-                    string_dados = f"{CPU_NUMBER};{DEVICE_MODEL}"
-                    texto_byte = bytes(string_dados, 'utf-8')
-                    response = self.POST_check_equipamento(texto_byte, URL_EQUIPAMENTO)
-                    if response:
-                        NUMERO_SERIAL = response.get("equipamento")
-                        if NUMERO_SERIAL:
-                            with open(DEVICE_PATH, 'w') as f:
-                                f.write(NUMERO_SERIAL)
-                            print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] Novo número serial obtido e salvo: {NUMERO_SERIAL}")
-                        else:
-                            print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] Erro: Nenhum número serial retornado pela API.")
-                except requests.RequestException as e:
-                    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] Erro na requisição para a API: {e}")
-            else:
-                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] Erro: Não foi possível obter o número serial da CPU.")
-
-    def get_rpi(self):        
-        try:
-            with open("/proc/cpuinfo", "r") as f:
-                for line in f:
-                    if line.startswith("Serial"):
-                        return line.strip().split(":")[1].strip()
-
-        except Exception as e:
-            print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] Erro ao ler o número de série: {e}")
-            return None
-        
-    def get_model(self):
-        try:
-            with open("/proc/cpuinfo", "r") as f:
-                for line in f:
-                    if line.startswith("Model"):
-                        return line.strip().split(":")[1].strip()
-
-        except Exception as e:
-            print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] Erro ao ler o número de série: {e}")
-            return None
-
+    
     def find_and_open_serial(self):
         LED_CONTROL.start_blinking(LED_CONTROL.led_config_ext, intervalo=1.5)
         while True:
@@ -98,12 +37,12 @@ class balanca():
             time.sleep(INTERVALO_RETRY)
 
     def find_prolific(self):
-        if not os.path.exists(DEV_PATH):
+        if not os.path.exists(SERIAL_PATH):
             return None
-        dispositivos = os.listdir(DEV_PATH)
+        dispositivos = os.listdir(SERIAL_PATH)
         for dev in dispositivos:
             if PROLIFIC_PADRAO in dev:
-                return os.path.join(DEV_PATH, dev)
+                return os.path.join(SERIAL_PATH, dev)
         return None
 
     def run(self):
@@ -141,7 +80,7 @@ class balanca():
                        f'{evento_balanca.Peso_total}')
                         
         texto_byte = bytes(string_dados, 'utf-8')
-        self.POST_eventos(texto_byte, URL_PAYLOAD)
+        self.POST_eventos(texto_byte, ENDPOINT_PAYLOAD)
 
     def process_print(self, linha, evento_balanca):
         if 'PCS:' in linha:
@@ -187,7 +126,7 @@ class balanca():
 
 
             texto_byte = bytes(string_dados, 'utf-8')
-            self.POST_eventos(texto_byte, URL_PAYLOAD)   
+            self.POST_eventos(texto_byte, ENDPOINT_PAYLOAD)   
     
     def POST_eventos(self, data, api_url):
         self.refatorar_eventos() 
@@ -213,7 +152,7 @@ class balanca():
         if registros:
             for registro in registros:
                 id_registro, data = registro
-                response = self.POST_ultimasTransmissoes(data, URL_PAYLOAD)
+                response = self.POST_ultimasTransmissoes(data, ENDPOINT_PAYLOAD)
                 if not response:
                     break
 

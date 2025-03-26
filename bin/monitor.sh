@@ -1,9 +1,7 @@
 #!/bin/bash
 
-REPO_PATH="/opt/BalancaTestes"
-CMD_INICIAR="python3 $REPO_PATH/bin/app/main.py"
+. config.sh
 LOG_FILE="/tmp/monitor.log"
-onehour=3600
 
 while true; do
     if ! pgrep -f "python3 $REPO_PATH/bin/app/main.py" > /dev/null; then
@@ -12,5 +10,5 @@ while true; do
     else
         echo "$(date '+%Y-%m-%d %H:%M:%S') - [Monitor] App is running." | tee -a "$LOG_FILE"
     fi
-    sleep "$onehour"
+    sleep "$ONEHOUR"
 done

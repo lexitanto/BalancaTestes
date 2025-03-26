@@ -1,15 +1,16 @@
 # main.py
 import time
 import threading
-from gps_module import gps
 from balanca_module import balanca
 from led_module import led
 from tracking_module import tracking
+from config import config
 
 def main():
+    CONFIG = config()
+    LED = led()
     # GPS = gps()
     BALANCA = balanca()
-    LED = led()
     STATUS = tracking()
 
     # gps_thread = threading.Thread(target=GPS.run, daemon=True)

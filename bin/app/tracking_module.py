@@ -1,10 +1,9 @@
 import os
 import time
 import requests
+from config import *
 from datetime import datetime, timezone
 
-URL_SERVER = "https://7948-170-80-64-72.ngrok-free.app/IoT/Balanca/status"
-DEVICE_PATH = "/etc/device_id"
 
 class tracking:
     def __init__(self):
