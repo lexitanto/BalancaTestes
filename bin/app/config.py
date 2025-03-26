@@ -31,6 +31,8 @@ class config():
         if os.path.exists(DEVICE_PATH):
             with open(DEVICE_PATH, "r") as f:
                 NUMERO_SERIAL = f.read().strip()
+                print(f"[Config] Número serial: {NUMERO_SERIAL}")
+
         else:
             if CPU_NUMBER:
                 try:
@@ -38,8 +40,7 @@ class config():
                     resposta = self.POST_check_equipamento(dados.encode("utf-8"), ENDPOINT_EQUIPAMENTO)
                     if resposta:
                        NUMERO_SERIAL = resposta.get("equipamento")
-                       print(f"[Config] Número serial: {NUMERO_SERIAL}")
-
+                       
                     if NUMERO_SERIAL:
                         with open(DEVICE_PATH, "w") as f:
                             f.write(NUMERO_SERIAL)
