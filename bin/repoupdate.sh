@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /opt/BalancaTestes/bin/config.sh 
+source config.sh 
 
 LOG_FILE="/tmp/update_repo.log"
 
