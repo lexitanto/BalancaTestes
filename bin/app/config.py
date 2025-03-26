@@ -3,7 +3,6 @@ import time
 import requests
 from datetime import datetime
 
-
 URL_SERVER = "https://7948-170-80-64-72.ngrok-free.app/IoT/Balanca"
 ENDPOINT_PAYLOAD = "/payload"
 ENDPOINT_EQUIPAMENTO = "/check_equipamento"
