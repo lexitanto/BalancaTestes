@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. config.sh
+. "$REPO_PATH/config.sh"
 LOG_FILE="/tmp/monitor.log"
 
 if ! pgrep -f "python3 $REPO_PATH/bin/app/main.py" > /dev/null; then
