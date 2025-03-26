@@ -4,7 +4,7 @@ import requests
 from datetime import datetime
 
 
-URL_SERVER = "https://7948-170-80-64-72.ngrok-free.app/IoT/Balanca"
+URL_SERVER = "https://7948-170-80-64-72.ngrok-free.app/IoT/Balanca/status"
 DEVICE_PATH = '/etc/device_id'
 
 class tracking():
