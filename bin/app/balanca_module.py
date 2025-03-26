@@ -247,8 +247,6 @@ class balanca():
                 headers = {"Content-Type": "application/octet-stream"}
                 endpoint = URL_SERVER + api_url
                 response = requests.post(endpoint, data=data, headers=headers)
-                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] HEADERS = {headers}. ENDPOINT = {endpoint} RESPONSE = {response.status_code};{response.raw};{response.json};{response._content}")
-
                 json_data = response.json()
 
                 if response.ok:
@@ -264,7 +262,7 @@ class balanca():
             except Exception as e:
                 tentativas += 1
                 print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] ❌ Erro ao checar o equipamento: {e}")
-                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] Tentativa {tentativas}/{MAX_TENTATIVAS}. Nova tentativa em {INTERVALO_RETRY} segundos...")
+                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] Tentativa {tentativas}. Nova tentativa em {INTERVALO_RETRY} segundos...")
                 time.sleep(INTERVALO_RETRY)
 
     def salvar_ultimaTransmissao(self, data):
