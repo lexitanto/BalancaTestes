@@ -13,7 +13,7 @@ class tracking():
         if os.path.exists(DEVICE_PATH):
             with open(DEVICE_PATH, 'r') as f:
                 NUMERO_SERIAL = f.read().strip()
-        dados = f'{NUMERO_SERIAL};Dispositivo online;{datetime.now}'
+        dados = f'{NUMERO_SERIAL};Dispositivo online;{datetime.now()}'
         texto_byte = bytes(dados, 'utf-8')
         headers = {"Content-Type": "application/octet-stream"}
         try:
