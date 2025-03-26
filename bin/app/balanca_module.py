@@ -33,6 +33,8 @@ class balanca():
                         return                  
                 except Exception as e:
                     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] Erro ao abrir a porta serial: {e}")
+                except KeyboardInterrupt:
+                    print("Encerrando a aplicação...")
             print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] Dispositivo serial não encontrado. Tentando novamente em {INTERVALO_RETRY} segundos...")
             time.sleep(INTERVALO_RETRY)
 
@@ -57,14 +59,11 @@ class balanca():
             print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Balanca] Leitura interrompida pelo usuário.") 
 
     def interpret_serial(self, linha, evento_balanca): 
-
         LED_CONTROL.acender_led(LED_CONTROL.led_evento_balanca)
-
         if '[h0][g0]' in linha:
             self.process_load(linha, evento_balanca)
         else:
             self.process_print(linha, evento_balanca)
-
         LED_CONTROL.desligar_led(LED_CONTROL.led_evento_balanca)
 
     def process_load(self, linha, evento_balanca):

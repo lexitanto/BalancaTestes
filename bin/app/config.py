@@ -31,7 +31,7 @@ class config():
         if os.path.exists(DEVICE_PATH):
             with open(DEVICE_PATH, "r") as f:
                 NUMERO_SERIAL = f.read().strip()
-                print(f"[Config] Número serial: {NUMERO_SERIAL}")
+                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Config] Número serial: {NUMERO_SERIAL}")
 
         else:
             if CPU_NUMBER:
@@ -44,9 +44,9 @@ class config():
                     if NUMERO_SERIAL:
                         with open(DEVICE_PATH, "w") as f:
                             f.write(NUMERO_SERIAL)
-                        print(f"[Config] Novo número serial salvo: {NUMERO_SERIAL}")
+                        print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Config] Novo número serial salvo: {NUMERO_SERIAL}")
                 except requests.RequestException as e:
-                    print(f"[Config] Erro na requisição para a API: {e}")
+                    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Config] Erro na requisição para a API: {e}")
 
     def POST_check_equipamento(self, data):
         tentativas = 0
