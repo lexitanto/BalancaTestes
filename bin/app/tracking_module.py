@@ -8,7 +8,7 @@ URL_SERVER = "https://7948-170-80-64-72.ngrok-free.app/IoT/Balanca/status"
 DEVICE_PATH = '/etc/device_id'
 
 class tracking():
-    def enviar_dados():
+    def enviar_dados(self):
         global NUMERO_SERIAL
         if os.path.exists(DEVICE_PATH):
             with open(DEVICE_PATH, 'r') as f:
