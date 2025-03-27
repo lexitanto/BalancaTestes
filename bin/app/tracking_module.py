@@ -16,6 +16,7 @@ class tracking:
         return "UNKNOWN_DEVICE"
 
     def enviar_dados(self):
+        global NUMERO_SERIAL
         while True:
             print(f"{NUMERO_SERIAL}")
             print(f"{URL_SERVER};{ENDPOINT_STATUS}")
