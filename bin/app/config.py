@@ -35,7 +35,7 @@ class config():
             if CPU_NUMBER:
                 try:
                     dados = f"{CPU_NUMBER};{DEVICE_MODEL}"
-                    resposta = self.POST_check_equipamento(dados.encode("utf-8"), ENDPOINT_EQUIPAMENTO)
+                    resposta = self.POST_check_equipamento(dados.encode("utf-8"))
                     if resposta:
                        self.numero_serial = resposta.get("equipamento")
 
