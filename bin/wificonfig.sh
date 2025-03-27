@@ -8,6 +8,7 @@ DEVICE="/dev/$1"
 
     flock -w 10 200 || exit 1
 
+    sudo reboot
     sudo systemctl daemon-reload
     [ ! -d "$MOUNT_POINT" ] && mkdir -p "$MOUNT_POINT"
 
