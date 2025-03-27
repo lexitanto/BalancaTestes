@@ -2,6 +2,7 @@ import os
 import time
 import requests
 from datetime import datetime
+from tracking_module import tracking
 
 URL_SERVER = "https://7948-170-80-64-72.ngrok-free.app/IoT/Balanca"
 ENDPOINT_PAYLOAD = "/payload"
@@ -38,11 +39,12 @@ class config():
                     resposta = self.POST_check_equipamento(dados.encode("utf-8"), ENDPOINT_EQUIPAMENTO)
                     if resposta:
                        self.numero_serial = resposta.get("equipamento")
-                       
+
                     if self.numero_serial:
                         with open(DEVICE_PATH, "w") as f:
                             f.write(self.numero_serial)
                         print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Config] Novo número serial salvo: {self.numero_serial}")
+
                 except requests.RequestException as e:
                     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Config] Erro na requisição para a API: {e}")
 

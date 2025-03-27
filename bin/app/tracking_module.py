@@ -7,14 +7,14 @@ from datetime import datetime, timezone
 CONFIG = config()
 
 class tracking:
-    def __init__(self):
-        self.numero_serial = self._ler_device_id()
+    # def __init__(self):
+    #     self.numero_serial = self._ler_device_id()
 
-    def _ler_device_id(self):
-        if os.path.exists(DEVICE_PATH):
-            with open(DEVICE_PATH, "r") as f:
-                return f.read().strip()
-        return "UNKNOWN_DEVICE"
+    # def _ler_device_id(self):
+    #     if os.path.exists(DEVICE_PATH):
+    #         with open(DEVICE_PATH, "r") as f:
+    #             return f.read().strip()
+    #     return "UNKNOWN_DEVICE"
 
     def enviar_dados(self):
         while True:            
