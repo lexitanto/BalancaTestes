@@ -4,7 +4,7 @@ import requests
 from config import *
 from datetime import datetime, timezone
 
-CONFIG = config
+CONFIG = config()
 
 class tracking:
     # def __init__(self):
