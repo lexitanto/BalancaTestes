@@ -16,11 +16,8 @@ class tracking:
         return "UNKNOWN_DEVICE"
 
     def enviar_dados(self):
-        global NUMERO_SERIAL
-        while True:
-            print(f"{NUMERO_SERIAL}")
-            print(f"{URL_SERVER};{ENDPOINT_STATUS}")
-            dados = f"{NUMERO_SERIAL};Dispositivo online;{datetime.now(timezone.utc)}"
+        while True:            
+            dados = f"{self.numero_serial};Dispositivo online;{datetime.now(timezone.utc)}"
             texto_byte = bytes(dados, "utf-8")
             headers = {"Content-Type": "application/octet-stream"}
             url = URL_SERVER + ENDPOINT_STATUS
