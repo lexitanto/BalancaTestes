@@ -8,6 +8,7 @@ from config import config
 
 def main():
     CONFIG = config()
+    print(CONFIG.numero_serial)
     LED = led()
     # GPS = gps()
     # BALANCA = balanca()
