@@ -7,13 +7,12 @@ DEVICE="/dev/$1"
 (
 
     flock -w 10 200 || exit 1
-
-    sudo reboot
+    
     sudo systemctl daemon-reload
     [ ! -d "$MOUNT_POINT" ] && mkdir -p "$MOUNT_POINT"
 
     if mount | grep -q "$MOUNT_POINT"; then
-        umount "$MOUNT_POINT"
+        sudo umount "$MOUNT_POINT"
         sleep 1
     fi
 
