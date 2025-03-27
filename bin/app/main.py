@@ -16,7 +16,7 @@ def main():
     # gps_thread = threading.Thread(target=GPS.run, daemon=True)
     # balanca_thread = threading.Thread(target=BALANCA.run, daemon=True)
     led_thread = threading.Thread(target=LED.monitor, daemon=True)
-    status_thread = threading.Thread(target=STATUS.enviar_dados, args=("Dispositivo online",),daemon=True)
+    status_thread = threading.Thread(target=STATUS.enviar_dados, daemon=True)
 
     # gps_thread.start()
     # balanca_thread.start()
