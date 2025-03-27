@@ -14,7 +14,6 @@ INTERVALO_RETRY = 60
 MAX_TENTATIVAS = 5
 CPU_NUMBER = None
 DEVICE_MODEL = None
-NUMERO_SERIAL = None
 _initialized = False
 
 class config():
@@ -23,28 +22,27 @@ class config():
         if not _initialized:
             CPU_NUMBER = self.get_rpi()
             DEVICE_MODEL = self.get_model()
+            self.numero_serial = None
             self.check_equipamento()
             _initialized = True
 
     def check_equipamento(self):
-        global NUMERO_SERIAL
         if os.path.exists(DEVICE_PATH):
             with open(DEVICE_PATH, "r") as f:
-                NUMERO_SERIAL = f.read().strip()
-                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Config] Número serial: {NUMERO_SERIAL}")
-
+                self.numero_serial = f.read().strip()
+                print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Config] Número serial: {self.numero_serial}")
         else:
             if CPU_NUMBER:
                 try:
                     dados = f"{CPU_NUMBER};{DEVICE_MODEL}"
                     resposta = self.POST_check_equipamento(dados.encode("utf-8"), ENDPOINT_EQUIPAMENTO)
                     if resposta:
-                       NUMERO_SERIAL = resposta.get("equipamento")
+                       self.numero_serial = resposta.get("equipamento")
                        
-                    if NUMERO_SERIAL:
+                    if self.numero_serial:
                         with open(DEVICE_PATH, "w") as f:
-                            f.write(NUMERO_SERIAL)
-                        print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Config] Novo número serial salvo: {NUMERO_SERIAL}")
+                            f.write(self.numero_serial)
+                        print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Config] Novo número serial salvo: {self.numero_serial}")
                 except requests.RequestException as e:
                     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Config] Erro na requisição para a API: {e}")
 

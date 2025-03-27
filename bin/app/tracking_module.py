@@ -4,6 +4,7 @@ import requests
 from config import *
 from datetime import datetime, timezone
 
+CONFIG = config()
 
 class tracking:
     def __init__(self):
@@ -17,7 +18,7 @@ class tracking:
 
     def enviar_dados(self):
         while True:            
-            dados = f"{self.numero_serial};Dispositivo online;{datetime.now(timezone.utc)}"
+            dados = f"{CONFIG.numero_serial};Dispositivo online;{datetime.now(timezone.utc)}"
             texto_byte = bytes(dados, "utf-8")
             headers = {"Content-Type": "application/octet-stream"}
             url = URL_SERVER + ENDPOINT_STATUS
