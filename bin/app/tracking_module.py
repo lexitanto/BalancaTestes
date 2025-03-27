@@ -17,6 +17,7 @@ class tracking:
 
     def enviar_dados(self):
         while True:
+            print(f"{NUMERO_SERIAL}")
             dados = f"{NUMERO_SERIAL};Dispositivo online;{datetime.now(timezone.utc)}"
             texto_byte = bytes(dados, "utf-8")
             headers = {"Content-Type": "application/octet-stream"}
