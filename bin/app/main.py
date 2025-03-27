@@ -10,7 +10,7 @@ def main():
     CONFIG = config()
     LED = led()
     # GPS = gps()
-    BALANCA = balanca()
+    # BALANCA = balanca()
     STATUS = tracking()
 
     # gps_thread = threading.Thread(target=GPS.run, daemon=True)
