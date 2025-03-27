@@ -6,6 +6,7 @@ from datetime import datetime
 URL_SERVER = "https://7948-170-80-64-72.ngrok-free.app/IoT/Balanca"
 ENDPOINT_PAYLOAD = "/payload"
 ENDPOINT_EQUIPAMENTO = "/check_equipamento"
+ENDPOINT_STATUS = "/status"
 PROLIFIC_PADRAO = "usb-Prolific_Technology_Inc._USB-Serial_Controller"
 SERIAL_PATH = "/dev/serial/by-id"
 DEVICE_PATH = "/etc/device_id"
