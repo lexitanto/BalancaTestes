@@ -4,7 +4,7 @@ MOUNT_POINT="/mnt/usb_mount"
 CONFIG_FILE="wifi_setup.txt"
 DEVICE="/dev/$1"
 
-LED_PIN=17
+LED_PIN=20
 echo "$LED_PIN" > /sys/class/gpio/export
 echo "out" > /sys/class/gpio/gpio$LED_PIN/direction
 
