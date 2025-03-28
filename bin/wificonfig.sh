@@ -3,26 +3,9 @@
 MOUNT_POINT="/mnt/usb_mount"
 CONFIG_FILE="wifi_setup.txt"
 DEVICE="/dev/$1"
-GPIO_PIN=20
 
-if [ ! -d "/sys/class/gpio/gpio${GPIO_PIN}" ]; then
-    echo "${GPIO_PIN}" | sudo tee /sys/class/gpio/export
-    sleep 1  
-fi
-
-acender_led() {
-    echo "1" | sudo tee /sys/class/gpio/gpio${GPIO_PIN}/value
-
-}
-
-apagar_led() {
-    echo "0" | sudo tee /sys/class/gpio/gpio${GPIO_PIN}/value
-
-}
 
 (
-
-    acender_led
 
     flock -w 10 200 || exit 1
     
@@ -70,7 +53,5 @@ EOF
     else
         echo "Falha ao montar /dev/$1"
     fi
-
-    apagar_led
 
 ) 200>/tmp/wifi_script.lock

@@ -10,16 +10,16 @@ def main():
     CONFIG = config()
     LED = led()
     # GPS = gps()
-    # BALANCA = balanca()
+    BALANCA = balanca()
     STATUS = tracking()
 
     # gps_thread = threading.Thread(target=GPS.run, daemon=True)
-    # balanca_thread = threading.Thread(target=BALANCA.run, daemon=True)
+    balanca_thread = threading.Thread(target=BALANCA.run, daemon=True)
     led_thread = threading.Thread(target=LED.monitor, daemon=True)
     status_thread = threading.Thread(target=STATUS.enviar_dados, daemon=True)
 
     # gps_thread.start()
-    # balanca_thread.start()
+    balanca_thread.start()
     led_thread.start()
     status_thread.start()
 
