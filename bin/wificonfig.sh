@@ -3,21 +3,21 @@
 MOUNT_POINT="/mnt/usb_mount"
 CONFIG_FILE="wifi_setup.txt"
 DEVICE="/dev/$1"
+GPIO_PIN=20
 
-LED_PIN=20
-if [ ! -d "/sys/class/gpio/gpio$GPIO_PIN" ]; then
-    sudo echo "$LED_PIN" > /sys/class/gpio/export
-    echo "GPIO $GPIO_PIN exportado"
+if [ ! -d "/sys/class/gpio/gpio${GPIO_PIN}" ]; then
+    echo "${GPIO_PIN}" | sudo tee /sys/class/gpio/export
+    sleep 1  
 fi
 
-sudo echo "out" > /sys/class/gpio/gpio$LED_PIN/direction
-
 acender_led() {
-    sudo echo "1" > /sys/class/gpio/gpio$LED_PIN/value
+    echo "1" | sudo tee /sys/class/gpio/gpio${GPIO_PIN}/value
+
 }
 
 apagar_led() {
-    sudo echo "0" > /sys/class/gpio/gpio$LED_PIN/value
+    echo "0" | sudo tee /sys/class/gpio/gpio${GPIO_PIN}/value
+
 }
 
 (
