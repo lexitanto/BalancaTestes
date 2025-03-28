@@ -4,7 +4,21 @@ MOUNT_POINT="/mnt/usb_mount"
 CONFIG_FILE="wifi_setup.txt"
 DEVICE="/dev/$1"
 
+LED_PIN=17
+echo "$LED_PIN" > /sys/class/gpio/export
+echo "out" > /sys/class/gpio/gpio$LED_PIN/direction
+
+acender_led() {
+    echo "1" > /sys/class/gpio/gpio$LED_PIN/value
+}
+
+apagar_led() {
+    echo "0" > /sys/class/gpio/gpio$LED_PIN/value
+}
+
 (
+
+    acender_led
 
     flock -w 10 200 || exit 1
     
@@ -53,5 +67,6 @@ EOF
         echo "Falha ao montar /dev/$1"
     fi
 
+    apagar_led
 
 ) 200>/tmp/wifi_script.lock
