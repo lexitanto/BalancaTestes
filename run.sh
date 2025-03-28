@@ -2,29 +2,6 @@
 
 sudo apt update && sudo apt upgrade -y 
 
-GITFETCH_SERVICE="gitfetch.service"
-GITFETCH_SERVICE_PATH="/etc/systemd/system/"
-GITFETCH_SCRIPT="gitfetch.sh"
-GITFETCH_SCRIPT_PATH="/opt/BalancaTestes/bin/"
-
-sudo chmod +x "${GITFETCH_SCRIPT_PATH}${GITFETCH_SCRIPT}"
-
-sudo tee "${GITFETCH_SERVICE_PATH}${GITFETCH_SERVICE}" > /dev/null <<EOF
-[Unit]
-Description=Atualiza o repositório em todo boot
-After=network-online.target
-Wants=network-online.target
-
-[Service]
-Type=oneshot
-User=root
-ExecStartPre=/bin/chmod +x ${GITFETCH_SCRIPT_PATH}${GITFETCH_SCRIPT}
-ExecStart=${GITFETCH_SCRIPT_PATH}${GITFETCH_SCRIPT}
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
 
 MONITOR_SERVICE="monitor.service"
 MONITOR_SERVICE_PATH="/etc/systemd/system/"
@@ -80,3 +57,29 @@ echo "O sistema será reiniciado agora!"
 sleep 3
 
 sudo reboot
+
+# Atualizaçções passadas 
+#GIT FETCH FOI IMPLEMENTADO NO .img
+
+# GITFETCH_SERVICE="gitfetch.service"
+# GITFETCH_SERVICE_PATH="/etc/systemd/system/"
+# GITFETCH_SCRIPT="gitfetch.sh"
+# GITFETCH_SCRIPT_PATH="/opt/BalancaTestes/bin/"
+
+# sudo chmod +x "${GITFETCH_SCRIPT_PATH}${GITFETCH_SCRIPT}"
+
+# sudo tee "${GITFETCH_SERVICE_PATH}${GITFETCH_SERVICE}" > /dev/null <<EOF
+# [Unit]
+# Description=Atualiza o repositório em todo boot
+# After=network-online.target
+# Wants=network-online.target
+
+# [Service]
+# Type=oneshot
+# User=root
+# ExecStartPre=/bin/chmod +x ${GITFETCH_SCRIPT_PATH}${GITFETCH_SCRIPT}
+# ExecStart=${GITFETCH_SCRIPT_PATH}${GITFETCH_SCRIPT}
+
+# [Install]
+# WantedBy=multi-user.target
+# EOF
