@@ -11,7 +11,6 @@ from connection_module import database_connection
 LOG_FILE = "/tmp/balanca.log"
 DB = database_connection()
 LED_CONTROL = led()
-CONFIG = config()
 
 class balanca():
     def __init__(self):
@@ -75,7 +74,7 @@ class balanca():
         evento_balanca.Peso_total = linha[44:51].lstrip('0')
         evento_balanca.DataEvento = data_Evento.strftime("%Y-%m-%d %H:%M:%S")
                         
-        string_dados =(f'{CONFIG.numero_serial};{evento_balanca.Cod_identificador};'
+        string_dados =(f'{NUMERO_SERIAL};{evento_balanca.Cod_identificador};'
                        f'{evento_balanca.DataEvento};{evento_balanca.Peso_atual};'
                        f'{evento_balanca.Peso_total}')
                         
@@ -116,7 +115,7 @@ class balanca():
             data_Evento = datetime.now()
             evento_balanca.DataEvento = data_Evento.strftime("%Y-%m-%d %H:%M:%S")
 
-            string_dados = ( f"{CONFIG.numero_serial};{evento_balanca.Cod_identificador};"
+            string_dados = ( f"{NUMERO_SERIAL};{evento_balanca.Cod_identificador};"
                              f"{evento_balanca.DataEvento};{evento_balanca.Peso_atual};"
                              f"{evento_balanca.Peso_total};{evento_balanca.Peso_maximo};"
                              f"{evento_balanca.Total_de_pesagens};{evento_balanca.Id_Pesagem};"
