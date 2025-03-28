@@ -6,11 +6,10 @@ DEVICE="/dev/$1"
 
 LED_PIN=20
 if [ ! -d "/sys/class/gpio/gpio$GPIO_PIN" ]; then
-    echo $GPIO_PIN > /sys/class/gpio/export
+    echo "$LED_PIN" > /sys/class/gpio/export
     echo "GPIO $GPIO_PIN exportado"
 fi
 
-echo "$LED_PIN" > /sys/class/gpio/export
 echo "out" > /sys/class/gpio/gpio$LED_PIN/direction
 
 acender_led() {
