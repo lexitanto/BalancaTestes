@@ -92,3 +92,5 @@ class config():
         except Exception as e:
             print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - [Config] Erro ao ler o número de série: {e}")
             return None
+        
+CONFIG = config()

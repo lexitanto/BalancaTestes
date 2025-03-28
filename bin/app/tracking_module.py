@@ -4,8 +4,6 @@ import requests
 from config import *
 from datetime import datetime, timezone
 
-CONFIG = config()
-
 class tracking:
     # def __init__(self):
     #     self.numero_serial = self._ler_device_id()
