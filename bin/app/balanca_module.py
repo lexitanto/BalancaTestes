@@ -4,6 +4,7 @@ import time
 import serial
 import requests
 from config import *
+from config import config
 from led_module import led
 from datetime import datetime
 from connection_module import database_connection
@@ -11,6 +12,7 @@ from connection_module import database_connection
 LOG_FILE = "/tmp/balanca.log"
 DB = database_connection()
 LED_CONTROL = led()
+CONFIG = config()
 
 class balanca():
     def __init__(self):
