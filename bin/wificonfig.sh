@@ -6,18 +6,18 @@ DEVICE="/dev/$1"
 
 LED_PIN=20
 if [ ! -d "/sys/class/gpio/gpio$GPIO_PIN" ]; then
-    echo "$LED_PIN" > /sys/class/gpio/export
+    sudo echo "$LED_PIN" > /sys/class/gpio/export
     echo "GPIO $GPIO_PIN exportado"
 fi
 
-echo "out" > /sys/class/gpio/gpio$LED_PIN/direction
+sudo echo "out" > /sys/class/gpio/gpio$LED_PIN/direction
 
 acender_led() {
-    echo "1" > /sys/class/gpio/gpio$LED_PIN/value
+    sudo echo "1" > /sys/class/gpio/gpio$LED_PIN/value
 }
 
 apagar_led() {
-    echo "0" > /sys/class/gpio/gpio$LED_PIN/value
+    sudo echo "0" > /sys/class/gpio/gpio$LED_PIN/value
 }
 
 (
